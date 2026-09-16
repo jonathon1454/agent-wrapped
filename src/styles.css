@@ -159,8 +159,9 @@ body {
 /* cursor */
 .cursor {
   font-family: monospace;
-  font-size: 2rem;
+  font-size: 0.6em;
   color: var(--accent);
+  font-weight: 400;
 }
 
 /* ticket grid (S2) */
