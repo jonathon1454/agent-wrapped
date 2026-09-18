@@ -3,12 +3,13 @@ import { SceneShell, fadeUp } from "../components/SceneShell";
 import { CountUp } from "../components/CountUp";
 import type { SceneProps } from "./types";
 
-export function SceneTickets({ agent }: SceneProps) {
+export function SceneTickets({ admin }: SceneProps) {
   const cards = 32;
+  const secsPerTicket = Math.round((365 * 24 * 60 * 60) / admin.totalTickets);
 
   return (
-    <SceneShell eyebrow="Tickets solved">
-      <motion.div className="ticket-grid" {...fadeUp}>
+    <SceneShell eyebrow="Tickets resolved" className="scene-tickets">
+      <motion.div className="ticket-grid scene-visual" {...fadeUp}>
         {Array.from({ length: cards }).map((_, i) => (
           <motion.div
             key={i}
@@ -18,17 +19,17 @@ export function SceneTickets({ agent }: SceneProps) {
             transition={{
               delay: 0.1 + i * 0.02,
               duration: 0.3,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.85, 0, 0.15, 1],
             }}
           />
         ))}
       </motion.div>
       <motion.h2 className="number" {...fadeUp} transition={{ delay: 0.3, duration: 0.5 }}>
-        <CountUp value={agent.ticketsSolved} duration={1.8} />
+        <CountUp value={admin.totalTickets} duration={1.8} />
       </motion.h2>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 1.6 }}>
-        That's one solved every <em>{agent.minutesPerTicket} minutes</em> you were
-        logged in.
+        Your operation resolved one every <em>{secsPerTicket} seconds</em>, all year.
+        Next year, Zendesk AI could take the repeatable half off the queue.
       </motion.p>
     </SceneShell>
   );

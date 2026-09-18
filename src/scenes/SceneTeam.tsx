@@ -1,41 +1,34 @@
 import { motion } from "framer-motion";
 import { SceneShell, fadeUp } from "../components/SceneShell";
+import { CountUp } from "../components/CountUp";
 import { fmtInt } from "../lib/useCountUp";
 import type { SceneProps } from "./types";
 
-export function SceneTeam({ agent }: SceneProps) {
-  const { size, teamTickets, rank } = agent.team;
-  const showRank = typeof rank === "number" && rank > 0 && rank <= size;
+export function SceneTeam({ admin }: SceneProps) {
+  const { size, teamTickets } = admin.team;
 
   return (
-    <SceneShell eyebrow="The team around you">
-      {showRank && (
-        <motion.div className="podium" {...fadeUp}>
-          <div className="col">
-            <span className="value">3rd</span>
-            <div className="block you" style={{ height: 70 }} />
-          </div>
-          <div className="col">
-            <span className="value">2nd</span>
-            <div className="block" style={{ height: 96 }} />
-          </div>
-          <div className="col">
-            <span className="value">1st</span>
-            <div className="block" style={{ height: 120 }} />
-          </div>
-        </motion.div>
-      )}
+    <SceneShell eyebrow="The team you built">
+      <motion.div className="podium scene-visual" {...fadeUp}>
+        <div className="col">
+          <span className="value">
+            <CountUp value={size} duration={1.2} />
+          </span>
+          <div className="block you" style={{ height: 120 }} />
+        </div>
+        <div className="col">
+          <span className="value">
+            <CountUp value={admin.hires} duration={1.2} />
+          </span>
+          <div className="block" style={{ height: 70 }} />
+        </div>
+      </motion.div>
       <motion.p className="lead" {...fadeUp} transition={{ delay: 0.4 }}>
-        Part of a team of <em>{size}</em>,
+        <em>{size}</em> agents enabled, <em>{admin.hires}</em> hired this year.
       </motion.p>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 0.7 }}>
-        solving {fmtInt(teamTickets)} tickets together.
-        {showRank && (
-          <>
-            <br />
-            You placed {rank} of {size}. Quietly impressive.
-          </>
-        )}
+        Solving {fmtInt(teamTickets)} tickets together. AI could give each of them{" "}
+        <em>a copilot next year</em>.
       </motion.p>
     </SceneShell>
   );

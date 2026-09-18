@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { SCENES } from "./scenes";
-import { mockAgent } from "./data/agent";
+import { mockAdmin } from "./data/admin";
 
 export default function App() {
   const [i, setI] = useState(0);
@@ -34,8 +34,9 @@ export default function App() {
         <div style={{ width: `${((i + 1) / SCENES.length) * 100}%` }} />
       </div>
 
+      {/* mode="wait" avoids overlapping fades (Greenhouse Motion) */}
       <AnimatePresence mode="wait">
-        <Scene key={SCENES[i].id} agent={mockAgent} />
+        <Scene key={SCENES[i].id} admin={mockAdmin} />
       </AnimatePresence>
 
       <div className="hud">

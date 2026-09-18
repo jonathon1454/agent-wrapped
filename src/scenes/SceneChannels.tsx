@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 import { SceneShell, fadeUp } from "../components/SceneShell";
 import type { SceneProps } from "./types";
 
-export function SceneChannels({ agent }: SceneProps) {
-  const top = agent.channels[0];
-  const rest = agent.channels.slice(1);
+export function SceneChannels({ admin }: SceneProps) {
+  const top = admin.channels[0];
+  const rest = admin.channels.slice(1);
   const restLabels = rest.map((c) => c.label).join(", and a little ");
 
   return (
-    <SceneShell eyebrow="Where they came from">
-      <motion.div className="chips" {...fadeUp}>
-        {agent.channels.map((c, i) => (
+    <SceneShell eyebrow="Where they reached you">
+      <motion.div className="chips scene-visual" {...fadeUp}>
+        {admin.channels.map((c, i) => (
           <motion.span
             key={c.label}
             className="chip"
@@ -19,19 +19,19 @@ export function SceneChannels({ agent }: SceneProps) {
             transition={{
               delay: 0.2 + i * 0.12,
               duration: 0.4,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.85, 0, 0.15, 1],
             }}
-            style={{ fontSize: `${0.85 + c.share / 80}rem` }}
           >
             {c.label} · {c.share}%
           </motion.span>
         ))}
       </motion.div>
       <motion.p className="lead" {...fadeUp} transition={{ delay: 0.9 }}>
-        You spoke fluent <em>{top.label}</em>.
+        Your operation ran fluent <em>{top.label}</em>.
       </motion.p>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 1.2 }}>
-        And a little {restLabels}.
+        And a little {restLabels}. AI agents could answer across all of them —{" "}
+        <em>at once</em>.
       </motion.p>
     </SceneShell>
   );

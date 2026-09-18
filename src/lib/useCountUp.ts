@@ -12,7 +12,7 @@ export function useCountUp(target: number, duration = 1.6): number {
     }
     const controls = animate(0, target, {
       duration,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.85, 0, 0.15, 1],
       onUpdate: (v) => setVal(v),
     });
     return () => controls.stop();

@@ -1,12 +1,205 @@
-:root {
-  --ink: #03363d;
-  --ink-2: #054b54;
-  --cream: #f5f0e6;
-  --cream-dim: #c9c3b4;
-  --muted: #7d9499;
-  --accent: #c2e812;
-  --accent-soft: #8fb36b;
-  --rule: rgba(245, 240, 230, 0.12);
+/* Greenhouse 3.0 Foundations
+   https://www.figma.com/design/xmPqv4UtHk7wfZfLA7Ds4a/?node-id=627-0 */
+
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vanilla Sans";
+  src: url("/fonts/vanilla-sans/VanillaSans-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Primary */
+  --licorice: #11110d;
+  --coconut: #ffffff;
+  --matcha: #d1f470;
+  --matcha-0: #e6faab; /* ZAIS pill fill */
+  --sky-soft: #bddcf7; /* ZAIS beam accent */
+
+  /* Secondary */
+  --sesame: #f5f5f2;
+  --fern: #203524;
+  --cactus: #a1d78f;
+  --pineapple: #feeb7e;
+  --shamrock: #2d4c33;
+
+  /* Lights / extended */
+  --sesame-200: #e5e5e2;
+  --sesame-300: #d5d5d2;
+  --sesame-400: #b4b4b0;
+  --sesame-500: #90918c;
+  --sesame-600: #42433e;
+  --matcha-200: #b2da56;
+  --matcha-400: #70a32a;
+  --matcha-600: #355e34;
+
+  /* Theme (Dark) — ZAIS Summit field */
+  --zais-field: #112111;
+  --bg: var(--zais-field);
+  --fg: var(--coconut);
+  --neutral-100: #ffffff12;
+  --neutral-200: #ffffff21;
+  --neutral-300: #ffffff33;
+  --neutral-400: #ffffff52;
+  --neutral-500: #ffffff78;
+  --neutral-600: #ffffffc9;
+  --hover: #ffffff12;
+  --active: #ffffff21;
+  --focus: #ffffff;
+
+  /* App aliases */
+  --ink: var(--zais-field);
+  --ink-2: #1a2e1a;
+  --cream: var(--fg);
+  --cream-dim: var(--neutral-600);
+  --muted: var(--neutral-500);
+  --accent: var(--matcha);
+  --accent-soft: var(--matcha-0);
+  --rule: #ffffff21;
+
+  /* Corner radius */
+  --radius-xxs: 4px;
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 40px;
+  --radius-xxl: 100px;
+  --radius-pill: 100px;
+  --radius-surface: var(--radius-lg);
+  --radius-surface-subtle: var(--radius-md);
+
+  /* Spacing (base) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+
+  /* Motion */
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+  --ease-in: cubic-bezier(0.5, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.5, 1);
+  --ease-in-out-1: cubic-bezier(0.7, 0, 0.3, 1);
+  --ease-in-out-2: cubic-bezier(0.85, 0, 0.15, 1);
+  --dur-functional: 100ms;
+  --dur-moderate: 300ms;
+  --dur-expressive: 600ms;
+
+  /* ZAIS light beams — soft diagonal washes, kept off-center */
+  --glow-matcha: linear-gradient(
+    125deg,
+    transparent 42%,
+    color-mix(in srgb, var(--matcha-0) 50%, transparent) 58%,
+    transparent 78%
+  );
+  --glow-fern: linear-gradient(
+    125deg,
+    transparent 48%,
+    color-mix(in srgb, var(--sky-soft) 42%, transparent) 62%,
+    transparent 82%
+  );
+  --wash-pineapple: transparent;
+  --wash-cactus: transparent;
+
+  --pill-bg: var(--matcha-0);
+  --pill-border: var(--shamrock);
+  --pill-fg: var(--licorice);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: var(--coconut);
+  --fg: var(--licorice);
+  --neutral-100: #11110d0d;
+  --neutral-200: #11110d1c;
+  --neutral-300: #11110d2e;
+  --neutral-400: #11110d52;
+  --neutral-500: #11110d78;
+  --neutral-600: #11110dc9;
+  --hover: #11110d0d;
+  --active: #11110d1c;
+  --focus: #11110d;
+
+  --ink: #f7f6f1;
+  --ink-2: var(--coconut);
+  --cream: var(--fg);
+  --cream-dim: var(--sesame-600);
+  --muted: var(--sesame-500);
+  --accent: var(--shamrock);
+  --accent-soft: var(--matcha-0);
+  --rule: var(--sesame-200);
+
+  /* ZAIS beams on light — Matcha + soft sky, offset to edges */
+  --glow-matcha: linear-gradient(
+    128deg,
+    transparent 38%,
+    color-mix(in srgb, var(--matcha-0) 55%, transparent) 55%,
+    transparent 72%
+  );
+  --glow-fern: linear-gradient(
+    128deg,
+    transparent 52%,
+    color-mix(in srgb, var(--sky-soft) 38%, transparent) 68%,
+    transparent 88%
+  );
+  --wash-pineapple: transparent;
+  --wash-cactus: transparent;
+
+  --pill-bg: var(--matcha-0);
+  --pill-border: var(--shamrock);
+  --pill-fg: var(--licorice);
 }
 
 * {
@@ -23,12 +216,29 @@ body,
 body {
   background: var(--ink);
   color: var(--cream);
-  font-family: "Söhne", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Helvetica, Arial, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  font-family: "Vanilla Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow: hidden;
+}
+
+/* Focus — 2px outside ring, radius matches control (Focus States) */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.dot:focus-visible {
+  outline-offset: 3px;
+  border-radius: var(--radius-xxl);
+}
+.btn:focus-visible {
+  outline-offset: 3px;
 }
 
 .stage {
@@ -39,6 +249,78 @@ body {
   justify-content: center;
   cursor: pointer;
   user-select: none;
+  overflow: hidden;
+  background-color: var(--ink);
+  /* ZAIS Summit beams — Matcha + soft sky cutting across the field */
+  background-image:
+    radial-gradient(
+      ellipse 70% 85% at 88% 12%,
+      color-mix(in srgb, var(--matcha-0) 32%, transparent) 0%,
+      color-mix(in srgb, var(--matcha-0) 10%, transparent) 38%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 65% 75% at 8% 95%,
+      color-mix(in srgb, var(--sky-soft) 18%, transparent) 0%,
+      transparent 62%
+    ),
+    linear-gradient(
+      125deg,
+      transparent 30%,
+      color-mix(in srgb, var(--matcha-0) 6%, transparent) 48%,
+      transparent 62%
+    );
+  background-repeat: no-repeat;
+}
+
+.stage::before,
+.stage::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(64px);
+}
+.stage::before {
+  width: 55vmax;
+  height: 55vmax;
+  top: -18%;
+  right: -14%;
+  background: var(--matcha-0);
+  opacity: 0.14;
+}
+.stage::after {
+  width: 48vmax;
+  height: 48vmax;
+  bottom: -22%;
+  left: -16%;
+  background: var(--sky-soft);
+  opacity: 0.09;
+}
+[data-theme="light"] .stage {
+  background-image:
+    radial-gradient(
+      ellipse 55% 70% at 100% 18%,
+      var(--matcha-0) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 0% 92%,
+      var(--sky-soft) 0%,
+      transparent 68%
+    );
+}
+[data-theme="light"] .stage::before {
+  opacity: 0.45;
+}
+[data-theme="light"] .stage::after {
+  opacity: 0.35;
+}
+
+.stage > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* progress */
@@ -48,127 +330,229 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--rule);
+  background: var(--neutral-200);
   z-index: 5;
 }
 .progress > div {
   height: 100%;
-  background: var(--accent);
-  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  background: var(--pill-bg);
+  border-block: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pill-border) 35%, transparent);
+  transition: width var(--dur-expressive) var(--ease-in-out-2);
 }
 
 /* hud */
 .hud {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: var(--space-24);
   left: 0;
   right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.9rem;
+  gap: var(--space-12);
   z-index: 5;
   pointer-events: none;
 }
 .hint {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
   text-transform: uppercase;
   color: var(--muted);
+  line-height: 1.2;
 }
 .dots {
   display: flex;
-  gap: 0.45rem;
+  gap: var(--space-8);
   pointer-events: auto;
 }
 .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-xxl);
   border: none;
   padding: 0;
-  background: var(--rule);
+  background: var(--neutral-300);
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  transition:
+    background var(--dur-functional) var(--ease-linear),
+    transform var(--dur-moderate) var(--ease-in-out-1);
 }
 .dot:hover {
-  transform: scale(1.3);
+  background: var(--neutral-500);
+  transform: scale(1.25);
 }
 .dot.on {
-  background: var(--accent);
+  background: var(--pill-bg);
+  box-shadow: inset 0 0 0 1px var(--pill-border);
+  transform: scale(1.15);
 }
 
-/* scene shell */
+/* scene shell — shared vertical rhythm
+   title → visual → number → comment (from Tickets spacing) */
 .scene {
   width: min(900px, 92vw);
   max-height: 80vh;
-  padding: 2rem 1rem;
+  padding: var(--space-32) var(--space-16);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 0;
+  --scene-title-gap: var(--space-24);
+  --scene-visual-gap: 4rem;
+  --scene-after-number: var(--scene-visual-gap);
+  --scene-after-lead: var(--space-20);
 }
+
+.scene > * {
+  margin-block: 0;
+}
+
+/* title → next block */
+.scene > .eyebrow + * {
+  margin-top: var(--scene-title-gap);
+}
+
+/* visual → big number / lead / comment */
+.scene-visual + .number,
+.scene-visual + .lead {
+  margin-top: var(--scene-visual-gap);
+}
+.scene-visual + .sub,
+.scene-visual + .delta {
+  margin-top: var(--scene-visual-gap);
+}
+
+/* lead above a visual (Speed) or into phrases (Words) */
+.lead + .scene-visual {
+  margin-top: var(--scene-title-gap);
+}
+
+/* number → final comment — always clear, never overlapping */
+.number + .sub,
+.number + .delta {
+  margin-top: var(--scene-after-number);
+}
+.number + .lead {
+  margin-top: var(--space-12);
+}
+
+/* lead → comment */
+.lead + .sub {
+  margin-top: var(--scene-after-lead);
+}
+
+/* open title → sub */
+.title + .sub {
+  margin-top: var(--scene-after-lead);
+}
+
 .eyebrow {
   margin: 0;
-  font-size: 0.74rem;
-  letter-spacing: 0.32em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
   text-transform: uppercase;
+  line-height: 1.2;
   color: var(--accent);
 }
 .title {
   margin: 0;
-  font-size: clamp(2.4rem, 8vw, 4.6rem);
-  font-weight: 600;
+  font-size: clamp(2.625rem, 7vw, 4.25rem); /* ~H1 L 68 → responsive */
+  font-weight: 500;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
+  color: var(--cream);
+  max-width: 18ch;
 }
 .number {
   font-size: clamp(3.2rem, 14vw, 8.5rem);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 0.95;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
+  color: var(--cream);
 }
 .sub {
   margin: 0;
-  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  font-size: clamp(1.05rem, 2.2vw, 1.4375rem); /* Paragraph Large */
+  font-weight: 400;
   color: var(--cream-dim);
-  line-height: 1.5;
+  line-height: 1.25;
   max-width: 36ch;
 }
 .sub em {
   color: var(--accent);
   font-style: normal;
+  font-weight: 500;
 }
 
-/* tuck the small text under the big number */
-.number + .sub,
-.number + .delta {
-  margin-top: -3.2rem;
-}
-.number + .lead {
-  margin-top: -1rem;
-}
 .lead {
-  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  font-size: clamp(1.05rem, 2.4vw, 1.4375rem);
+  font-weight: 400;
   color: var(--cream);
 }
 
-/* cursor */
-.cursor {
-  font-family: monospace;
-  font-size: 0.6em;
-  color: var(--accent);
-  font-weight: 400;
+/* Tickets only — nudge final comment up slightly */
+.scene-tickets .number + .sub {
+  margin-top: calc(var(--scene-after-number) - 1.75rem);
 }
 
-/* ticket grid (S2) */
+/* Deflection — quoted phrases equidistant from lead and bottom comment */
+.scene-words .lead + .scene-visual,
+.scene-words .scene-visual + .sub {
+  margin-top: var(--space-32);
+}
+
+/* CSAT — fill the stage; keep score mid-high, closer near the HUD */
+.scene-csat {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  min-height: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  padding-top: clamp(4rem, 16vh, 8rem);
+  padding-bottom: 0;
+  box-sizing: border-box;
+}
+.scene-csat-comment {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* sit above the HUD dots */
+  bottom: 5.5rem;
+  width: min(36ch, 92%);
+  margin-inline: auto !important;
+  margin-block: 0 !important;
+  z-index: 2;
+}
+
+/* Long thread — keep the full chat on-screen with tighter vertical rhythm */
+.scene-thread {
+  --scene-title-gap: var(--space-16);
+  --scene-visual-gap: var(--space-24);
+  --scene-after-lead: var(--space-16);
+  max-height: none;
+}
+
+.cursor {
+  font-family: inherit;
+  font-size: 0.55em;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ticket grid */
 .ticket-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 6px;
+  gap: var(--space-4);
   width: min(560px, 80vw);
   margin: 0 auto;
 }
@@ -176,59 +560,72 @@ body {
   aspect-ratio: 1.3 / 1;
   background: var(--ink-2);
   border: 1px solid var(--rule);
-  border-radius: 4px;
+  border-radius: var(--radius-xxs);
 }
 
-/* phrase cloud (S3) */
+/* phrase cloud */
 .phrases {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1rem;
+  gap: var(--space-8) var(--space-16);
   justify-content: center;
   max-width: 50ch;
 }
 .phrase {
   color: var(--cream-dim);
-  font-size: 0.95rem;
+  font-size: 15px;
+  line-height: 1.45;
 }
 
-/* mood bar (S4) */
+/* mood bar */
 .mood {
   width: min(560px, 84vw);
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: var(--space-12);
 }
 .mood-track {
   position: relative;
-  height: 14px;
-  border-radius: 99px;
-  background: var(--ink-2);
+  height: 12px;
+  border-radius: var(--radius-xxl);
+  background: var(--neutral-200);
   overflow: hidden;
 }
 .mood-fill {
   position: absolute;
   inset: 0;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+  border-radius: var(--radius-xxl);
+  background: linear-gradient(
+    90deg,
+    var(--matcha-0),
+    var(--matcha),
+    color-mix(in srgb, var(--sky-soft) 70%, var(--matcha-0))
+  );
 }
 .mood-ends {
   display: flex;
   justify-content: space-between;
-  font-size: 1.4rem;
+}
+.mood-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 .delta {
-  font-size: 1rem;
+  font-size: 15px;
   color: var(--cream-dim);
 }
 .delta strong {
   color: var(--accent);
+  font-weight: 500;
 }
 
-/* speed ribbon (S5) */
+/* speed ribbon */
 .ribbon-wrap {
   width: min(620px, 86vw);
-  padding: 3.4rem 0;
+  padding: var(--space-32) 0;
   position: relative;
 }
 .ribbon {
@@ -245,18 +642,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  gap: var(--space-4);
 }
 .marker .dot2 {
   width: 14px;
   height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
+  border-radius: var(--radius-xxl);
+  background: var(--pill-bg);
+  box-shadow: 0 0 0 1.5px var(--pill-border);
 }
 .marker .label {
   position: absolute;
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
   text-transform: uppercase;
   color: var(--muted);
   white-space: nowrap;
@@ -265,11 +664,12 @@ body {
   top: -2.4rem;
 }
 .marker.down .label {
-  bottom: -2.4rem;
+  position: static;
+  bottom: auto;
 }
 .marker .value {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 .marker.up .value {
@@ -277,11 +677,18 @@ body {
   position: relative;
 }
 .marker.down .value {
-  position: relative;
-  bottom: -0.5rem;
+  position: static;
+  bottom: auto;
+}
+.marker-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin-top: 0.15rem;
 }
 
-/* histogram (S6) */
+/* histogram */
 .histo {
   display: flex;
   align-items: flex-end;
@@ -291,183 +698,258 @@ body {
 }
 .bar {
   flex: 1;
-  background: var(--ink-2);
-  border-radius: 2px 2px 0 0;
+  background: var(--coconut);
+  border-radius: var(--radius-xxs) var(--radius-xxs) 0 0;
   min-height: 4px;
+  opacity: 0.28;
 }
 .bar.peak {
-  background: var(--accent);
+  background: var(--matcha);
+  opacity: 1;
+  box-shadow: none;
 }
 
-/* channels (S7) */
+/* channels */
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem;
+  gap: var(--space-12);
   justify-content: center;
   max-width: 60ch;
 }
 .chip {
-  padding: 0.5rem 1.1rem;
-  border-radius: 99px;
-  background: var(--ink-2);
-  border: 1px solid var(--rule);
-  color: var(--cream);
+  padding: var(--space-8) var(--space-20);
+  border-radius: var(--radius-xxl);
+  background: var(--pill-bg);
+  border: 1.5px solid var(--pill-border);
+  color: var(--pill-fg);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: nowrap;
+  backdrop-filter: blur(12px);
 }
 
-/* thread (S8) */
+/* thread — full conversation visible */
 .thread {
   width: min(440px, 84vw);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-height: 38vh;
-  overflow: hidden;
-  margin-bottom: 0.4rem;
+  gap: var(--space-4);
+  max-height: none;
+  overflow: visible;
 }
 .bubble {
-  padding: 0.6rem 1rem;
-  border-radius: 14px;
-  font-size: 0.9rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.35;
   color: var(--cream-dim);
   max-width: 80%;
 }
 .bubble.them {
   align-self: flex-start;
   background: var(--ink-2);
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: var(--radius-xxs);
 }
 .bubble.you {
   align-self: flex-end;
-  background: rgba(194, 232, 18, 0.12);
-  border: 1px solid rgba(194, 232, 18, 0.3);
-  border-bottom-right-radius: 4px;
+  background: var(--pill-bg);
+  border: 1.5px solid var(--pill-border);
+  color: var(--pill-fg);
+  border-bottom-right-radius: var(--radius-xxs);
 }
 
-/* quote (S9) */
+/* quote card — surface radius, soft elevation via border */
 .quote-card {
   width: min(620px, 88vw);
-  padding: 2.4rem;
-  background: var(--ink-2);
+  padding: var(--space-40);
+  background: color-mix(in srgb, var(--ink-2) 88%, var(--matcha-0));
   border: 1px solid var(--rule);
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   text-align: left;
+  box-shadow: 0 24px 48px #00000055;
+  backdrop-filter: blur(12px);
 }
 .quote-mark {
   font-size: 3rem;
+  font-weight: 500;
   color: var(--accent);
   line-height: 0.4;
   height: 1rem;
 }
 .quote-text {
-  font-size: clamp(1.2rem, 3vw, 1.7rem);
-  line-height: 1.4;
-  margin: 0.8rem 0 1.2rem;
+  font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: var(--space-12) 0 var(--space-20);
   color: var(--cream);
 }
+.quote-text em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 500;
+}
 .quote-attr {
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* team (S10) */
+/* team */
 .podium {
   display: flex;
   align-items: flex-end;
-  gap: 1rem;
+  gap: var(--space-16);
 }
 .podium .col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-8);
 }
 .podium .block {
   width: 64px;
-  border-radius: 4px 4px 0 0;
-  background: var(--ink-2);
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+  background: var(--coconut);
+  opacity: 0.28;
 }
 .podium .block.you {
-  background: var(--accent);
+  background: var(--matcha);
+  opacity: 1;
+  box-shadow: none;
+}
+.podium .value {
+  font-weight: 500;
+  font-size: 15px;
 }
 
-/* recap (S11) */
+/* recap */
 .recap {
   width: min(520px, 90vw);
-  padding: 2.2rem;
-  background: var(--ink-2);
+  padding: var(--space-32);
+  background: color-mix(in srgb, var(--ink-2) 90%, var(--matcha-0));
   border: 1px solid var(--rule);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   text-align: center;
+  box-shadow: 0 24px 56px #00000066;
+  backdrop-filter: blur(12px);
 }
 .recap .name {
-  font-size: 1.2rem;
+  font-size: 21px;
+  font-weight: 500;
   color: var(--cream-dim);
-  margin-bottom: 0.4rem;
+  margin-bottom: var(--space-4);
 }
 .recap .hero {
-  font-size: clamp(2.8rem, 11vw, 4.4rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  font-size: clamp(2.8rem, 11vw, 4.25rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.05;
+  color: var(--cream);
 }
 .recap .hero-label {
   color: var(--muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.2em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
   text-transform: uppercase;
-  margin-top: 0.4rem;
+  margin-top: var(--space-8);
 }
 .recap .minis {
   display: flex;
   justify-content: space-around;
-  margin: 1.6rem 0;
-  padding-top: 1.4rem;
+  margin: var(--space-24) 0;
+  padding-top: var(--space-24);
   border-top: 1px solid var(--rule);
 }
 .mini .v {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 500;
   color: var(--cream);
 }
 .mini .k {
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 0.25rem;
+  margin-top: var(--space-4);
 }
 .share-row {
   display: flex;
-  gap: 0.7rem;
+  gap: var(--space-12);
   justify-content: center;
   pointer-events: auto;
 }
 .btn {
   pointer-events: auto;
-  background: transparent;
-  border: 1px solid var(--rule);
-  color: var(--cream);
-  padding: 0.55rem 1.1rem;
-  border-radius: 99px;
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
+  background: var(--pill-bg);
+  border: 1.5px solid var(--pill-border);
+  color: var(--pill-fg);
+  padding: var(--space-12) var(--space-24);
+  border-radius: var(--radius-xxl);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
   font-family: inherit;
-  transition: border-color 0.3s, color 0.3s;
+  backdrop-filter: blur(17px);
+  transition:
+    background var(--dur-moderate) var(--ease-in-out-1),
+    border-color var(--dur-moderate) var(--ease-in-out-1),
+    color var(--dur-moderate) var(--ease-in-out-1),
+    transform var(--dur-expressive) var(--ease-in-out-2),
+    filter var(--dur-moderate) var(--ease-in-out-1);
 }
 .btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  filter: brightness(0.97);
+  background: color-mix(in srgb, var(--pill-bg) 88%, var(--pill-border));
+  border-color: var(--pill-border);
+  color: var(--pill-fg);
+}
+.btn:active {
+  transform: scale(0.98);
+  filter: brightness(0.94);
+}
+
+/* Outline pill — glass on dark field */
+.btn.ghost {
+  background: color-mix(in srgb, var(--coconut) 8%, transparent);
+  border-color: var(--pill-border);
+  color: var(--coconut);
+  backdrop-filter: blur(17px);
+}
+.btn.ghost:hover {
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  filter: none;
+}
+
+/* Primary stays Matcha pill (ZAIS default CTA) */
+.btn.primary {
+  background: var(--pill-bg);
+  border-color: var(--pill-border);
+  color: var(--pill-fg);
+}
+.btn.primary:hover {
+  background: color-mix(in srgb, var(--pill-bg) 88%, var(--pill-border));
+  border-color: var(--pill-border);
+  color: var(--pill-fg);
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    transition-duration: 0.01ms !important;
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

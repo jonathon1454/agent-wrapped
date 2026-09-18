@@ -3,42 +3,46 @@ import { SceneShell } from "../components/SceneShell";
 import { fmtInt } from "../lib/useCountUp";
 import type { SceneProps } from "./types";
 
-export function SceneRecap({ agent }: SceneProps) {
+export function SceneRecap({ admin }: SceneProps) {
   const stop = (e: React.MouseEvent) => e.stopPropagation();
 
   return (
-    <SceneShell eyebrow="Your year, on the record">
+    <SceneShell eyebrow="Your year, at the helm">
       <motion.div
-        className="recap"
-        initial={{ opacity: 0, y: 30, scale: 0.97 }}
+        className="recap scene-visual"
+        initial={{ opacity: 0, y: 10, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, ease: [0.85, 0, 0.15, 1] }}
         onClick={stop}
       >
-        <div className="name">{agent.agentName} · {agent.year}</div>
-        <div className="hero">{fmtInt(agent.ticketsSolved)}</div>
-        <div className="hero-label">tickets solved</div>
+        <div className="name">{admin.orgName} · {admin.year}</div>
+        <div className="hero">{fmtInt(admin.totalTickets)}</div>
+        <div className="hero-label">tickets resolved by your operation</div>
 
         <div className="minis">
           <div className="mini">
-            <div className="v">{agent.csat.toFixed(1)}</div>
+            <div className="v">{admin.csat.toFixed(1)}</div>
             <div className="k">CSAT / 5</div>
           </div>
           <div className="mini">
-            <div className="v">{agent.resolutionLabel}</div>
-            <div className="k">Avg solve</div>
+            <div className="v">{admin.slaCompliance}%</div>
+            <div className="k">SLA hit</div>
           </div>
           <div className="mini">
-            <div className="v">{agent.longestThread.replies}</div>
-            <div className="k">Longest thread</div>
+            <div className="v">{admin.deflectionRate}%</div>
+            <div className="k">Deflected</div>
+          </div>
+          <div className="mini">
+            <div className="v">{admin.agentsEnabled}</div>
+            <div className="k">Agents</div>
           </div>
         </div>
 
         <div className="share-row">
-          <button className="btn" onClick={stop}>Save image</button>
-          <button className="btn" onClick={stop}>Share to Slack</button>
+          <button className="btn primary" onClick={stop}>Save image</button>
+          <button className="btn ghost" onClick={stop}>Share to Slack</button>
           <button
-            className="btn"
+            className="btn ghost"
             onClick={(e) => {
               stop(e);
               window.open(
@@ -59,7 +63,8 @@ export function SceneRecap({ agent }: SceneProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
       >
-        Thanks for showing up — every ticket, every time.
+        You kept the queue moving all year. Next year, AI could take on more of the
+        repeatable half.
       </motion.p>
     </SceneShell>
   );

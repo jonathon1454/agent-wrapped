@@ -12,10 +12,10 @@ function barHeight(i: number): number {
   return Math.min(100, base + swell);
 }
 
-export function ScenePeakWeek({ agent }: SceneProps) {
+export function ScenePeakWeek({ admin }: SceneProps) {
   return (
-    <SceneShell eyebrow="The longest week">
-      <motion.div className="histo" {...fadeUp}>
+    <SceneShell eyebrow="The surge">
+      <motion.div className="histo scene-visual" {...fadeUp}>
         {Array.from({ length: 52 }).map((_, i) => (
           <motion.div
             key={i}
@@ -25,18 +25,18 @@ export function ScenePeakWeek({ agent }: SceneProps) {
             transition={{
               delay: 0.2 + i * 0.012,
               duration: 0.4,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.85, 0, 0.15, 1],
             }}
           />
         ))}
       </motion.div>
       <motion.h2 className="number" {...fadeUp} transition={{ delay: 0.9 }}>
-        <CountUp value={agent.peakWeek.tickets} duration={1.2} />
+        <CountUp value={admin.peakWeek.tickets} duration={1.2} />
       </motion.h2>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 1.4 }}>
-        tickets, {agent.peakWeek.weekLabel}. {agent.peakWeek.context}.
+        tickets, {admin.peakWeek.weekLabel}. {admin.peakWeek.context}.
         <br />
-        You showed up. So did the coffee.
+        You staffed for it. Next peak, AI could absorb <em>the repeatable half</em>.
       </motion.p>
     </SceneShell>
   );

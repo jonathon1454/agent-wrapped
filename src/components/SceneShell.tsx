@@ -1,31 +1,41 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { dur, easeIn, easeInOut2, easeOut, fadeUp } from "../lib/motion";
 
 export function SceneShell({
   children,
   eyebrow,
+  className,
 }: {
   children: ReactNode;
   eyebrow?: string;
+  className?: string;
 }) {
   return (
     <motion.section
-      className="scene"
-      initial={{ opacity: 0, y: 28 }}
+      className={["scene", className].filter(Boolean).join(" ")}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -28 }}
-      transition={{ duration: 0.6, ease: EASE }}
+      exit={{
+        opacity: 0,
+        y: -8,
+        transition: { duration: dur.moderate, ease: easeIn },
+      }}
+      transition={{ duration: dur.expressive, ease: easeInOut2 }}
     >
-      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+      {eyebrow && (
+        <motion.p
+          className="eyebrow"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: dur.moderate, ease: easeOut, delay: 0.05 }}
+        >
+          {eyebrow}
+        </motion.p>
+      )}
       {children}
     </motion.section>
   );
 }
 
-export const fadeUp = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, ease: EASE },
-};
+export { fadeUp, dur, easeIn, easeOut, easeInOut2 };

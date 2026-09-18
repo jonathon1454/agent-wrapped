@@ -16,10 +16,10 @@ const BUBBLES: { who: "them" | "you"; text: string }[] = [
   { who: "you", text: "Anytime." },
 ];
 
-export function SceneLongThread({ agent }: SceneProps) {
+export function SceneLongThread({ admin }: SceneProps) {
   return (
-    <SceneShell eyebrow="The one that stuck">
-      <motion.div className="thread" {...fadeUp}>
+    <SceneShell eyebrow="The one that stuck" className="scene-thread">
+      <motion.div className="thread scene-visual" {...fadeUp}>
         {BUBBLES.map((b, i) => (
           <motion.div
             key={i}
@@ -33,11 +33,11 @@ export function SceneLongThread({ agent }: SceneProps) {
         ))}
       </motion.div>
       <motion.p className="lead" {...fadeUp} transition={{ delay: 2 }}>
-        <CountUp value={agent.longestThread.replies} duration={1} /> replies over{" "}
-        <CountUp value={agent.longestThread.days} duration={1} /> days.
+        <CountUp value={admin.longestThread.replies} duration={1} /> replies over{" "}
+        <CountUp value={admin.longestThread.days} duration={1} /> days.
       </motion.p>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 2.6 }}>
-        Some conversations just <em>need</em> time.
+        Some conversations need a human. AI could handle <em>more of the rest</em>.
       </motion.p>
     </SceneShell>
   );

@@ -1,5 +1,5 @@
-import type { AgentYear } from "../data/agent";
+import type { AdminYear } from "../data/admin";
 
 export interface SceneProps {
-  agent: AgentYear;
+  admin: AdminYear;
 }

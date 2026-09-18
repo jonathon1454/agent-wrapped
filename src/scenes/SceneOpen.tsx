@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SceneShell } from "../components/SceneShell";
+import { dur, easeInOut1, easeLinear, easeOut } from "../lib/motion";
 import type { SceneProps } from "./types";
 
-const TITLE = "Your year,\non the record.";
+const TITLE = "Your year,\nat the helm.";
 
-function useTypewriter(text: string, startDelay = 600, speed = 48) {
+function useTypewriter(text: string, startDelay = 400, speed = 40) {
   const [out, setOut] = useState("");
   const [done, setDone] = useState(false);
 
@@ -30,7 +31,7 @@ function useTypewriter(text: string, startDelay = 600, speed = 48) {
   return { out, done };
 }
 
-export function SceneOpen({ agent }: SceneProps) {
+export function SceneOpen({ admin }: SceneProps) {
   const { out, done } = useTypewriter(TITLE);
 
   return (
@@ -39,7 +40,7 @@ export function SceneOpen({ agent }: SceneProps) {
         className="title"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: dur.moderate, ease: easeOut }}
         style={{ whiteSpace: "pre-line" }}
       >
         {out}
@@ -47,7 +48,11 @@ export function SceneOpen({ agent }: SceneProps) {
           className="cursor"
           aria-hidden
           animate={{ opacity: [1, 0, 1] }}
-          transition={{ duration: 1, repeat: Infinity, repeatDelay: 0 }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            ease: easeLinear,
+          }}
           style={{ marginLeft: "0.05em" }}
         >
           |
@@ -55,11 +60,11 @@ export function SceneOpen({ agent }: SceneProps) {
       </motion.h1>
       <motion.p
         className="sub"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: done ? 1 : 0 }}
-        transition={{ duration: 0.6 }}
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: done ? 1 : 0, y: done ? 0 : 6 }}
+        transition={{ duration: dur.expressive, ease: easeInOut1 }}
       >
-        {agent.agentName} · {agent.year}
+        {admin.orgName} · {admin.year}
       </motion.p>
     </SceneShell>
   );
