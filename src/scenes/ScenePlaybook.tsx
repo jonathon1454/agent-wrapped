@@ -3,11 +3,11 @@ import { SceneShell, fadeUp } from "../components/SceneShell";
 import { fmtInt } from "../lib/useCountUp";
 import type { SceneProps } from "./types";
 
-export function SceneRecap({ admin }: SceneProps) {
+export function ScenePlaybook({ admin }: SceneProps) {
   const stop = (e: React.MouseEvent) => e.stopPropagation();
 
   return (
-    <SceneShell eyebrow="Your year, at the helm">
+    <SceneShell eyebrow="Your playbook">
       <motion.div
         className="recap scene-visual"
         initial={{ opacity: 0, y: 10, scale: 0.97 }}
@@ -35,37 +35,26 @@ export function SceneRecap({ admin }: SceneProps) {
             <div className="k">Self-serve</div>
           </div>
           <div className="mini">
-            <div className="v">{admin.agentsEnabled}</div>
-            <div className="k">Agents</div>
+            <div className="v">{admin.fcr}%</div>
+            <div className="k">FCR</div>
           </div>
         </div>
 
-        <div className="share-row">
-          <button className="btn primary" onClick={stop}>
-            Save image
-          </button>
-          <button className="btn ghost" onClick={stop}>
-            Share to Slack
-          </button>
-          <button
-            className="btn ghost"
-            onClick={(e) => {
-              stop(e);
-              window.open(
-                "https://www.linkedin.com/sharing/share-offsite/?url=" +
-                  encodeURIComponent(window.location.href),
-                "_blank",
-                "noopener,noreferrer"
-              );
-            }}
-          >
-            Share to LinkedIn
-          </button>
+        <div className="share-row playbook-row">
+          {admin.playbookLinks.map((link) => (
+            <a
+              key={link.id}
+              className={`btn${link.primary ? " primary" : " ghost"}`}
+              href={link.href}
+              onClick={stop}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </motion.div>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 0.8 }}>
-        You kept the queue moving all year. Next year, AI could take on more of the{" "}
-        <em>repeatable half</em>.
+        Dig into the full analysis, or book time to plan what AI could unlock next.
       </motion.p>
     </SceneShell>
   );

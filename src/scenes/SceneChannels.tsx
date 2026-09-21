@@ -3,9 +3,8 @@ import { SceneShell, fadeUp } from "../components/SceneShell";
 import type { SceneProps } from "./types";
 
 export function SceneChannels({ admin }: SceneProps) {
-  const top = admin.channels[0];
-  const rest = admin.channels.slice(1);
-  const restLabels = rest.map((c) => c.label).join(", and a little ");
+  const top = [...admin.channels].sort((a, b) => b.share - a.share)[0];
+  const standout = [...admin.channels].sort((a, b) => b.yoy - a.yoy)[0];
 
   return (
     <SceneShell eyebrow="Where they reached you">
@@ -13,16 +12,17 @@ export function SceneChannels({ admin }: SceneProps) {
         {admin.channels.map((c, i) => (
           <motion.span
             key={c.label}
-            className="chip"
+            className={`chip${c.label === standout.label ? " chip-hot" : ""}`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
-              delay: 0.2 + i * 0.12,
+              delay: 0.2 + i * 0.1,
               duration: 0.4,
               ease: [0.85, 0, 0.15, 1],
             }}
           >
-            {c.label} · {c.share}%
+            {c.label} · {c.share}% · {c.csat.toFixed(1)} ·{" "}
+            {c.yoy >= 0 ? `+${c.yoy}%` : `${c.yoy}%`}
           </motion.span>
         ))}
       </motion.div>
@@ -30,8 +30,8 @@ export function SceneChannels({ admin }: SceneProps) {
         Your operation ran fluent <em>{top.label}</em>.
       </motion.p>
       <motion.p className="sub" {...fadeUp} transition={{ delay: 1.2 }}>
-        And a little {restLabels}. AI agents could answer across all of them —{" "}
-        <em>at once</em>.
+        Fastest growth: <em>{standout.label}</em> at +{standout.yoy}% YoY. AI agents
+        could answer across all of them — at once.
       </motion.p>
     </SceneShell>
   );

@@ -1,21 +1,25 @@
 import { motion } from "framer-motion";
 import { SceneShell, fadeUp } from "../components/SceneShell";
 import { CountUp } from "../components/CountUp";
+import { MetricBadge } from "../components/MetricBadge";
 import type { SceneProps } from "./types";
 
-const SOURCES = ["AI Agent", "Help Center", "Answer Bot", "Community"];
-
-export function SceneWords({ admin }: SceneProps) {
+export function SceneSelfServe({ admin }: SceneProps) {
   return (
-    <SceneShell eyebrow="Deflection" className="scene-words">
-      <motion.h2 className="number" {...fadeUp}>
-        <CountUp value={admin.deflectedTickets} duration={1.8} />
-      </motion.h2>
+    <SceneShell eyebrow="Self-serve" className="scene-words">
+      <motion.div className="hero-with-badge" {...fadeUp}>
+        <h2 className="number">
+          <CountUp value={admin.selfServeRate} duration={1.8} />
+          <span style={{ fontSize: "0.35em", color: "var(--muted)" }}>%</span>
+        </h2>
+        <MetricBadge value={admin.selfServeRate} />
+      </motion.div>
       <motion.p className="lead" {...fadeUp} transition={{ delay: 0.4 }}>
-        tickets resolved without an agent — <em>{admin.deflectionRate}%</em> of the queue.
+        of tickets resolved without an agent —{" "}
+        <CountUp value={admin.deflectedTickets} duration={1.4} /> deflections.
       </motion.p>
       <motion.div className="phrases scene-visual" {...fadeUp} transition={{ delay: 0.9 }}>
-        {SOURCES.map((p, i) => (
+        {admin.selfServeSources.map((p, i) => (
           <motion.span
             key={p}
             className="phrase"

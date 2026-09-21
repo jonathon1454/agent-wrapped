@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { SceneShell, fadeUp } from "../components/SceneShell";
 import { CountUp } from "../components/CountUp";
+import { MetricBadge } from "../components/MetricBadge";
 import { dur, easeOut } from "../lib/motion";
 import type { SceneProps } from "./types";
 
@@ -25,10 +26,16 @@ export function SceneCsat({ admin }: SceneProps) {
           />
         </div>
       </motion.div>
-      <motion.h2 className="number" {...fadeUp} transition={{ delay: 0.5 }}>
-        <CountUp value={admin.csat} duration={1.4} decimals={1} />
-        <span style={{ fontSize: "0.4em", color: "var(--muted)" }}> / 5</span>
-      </motion.h2>
+      <motion.div className="hero-with-badge" {...fadeUp} transition={{ delay: 0.5 }}>
+        <h2 className="number">
+          <CountUp value={admin.csatPercentile} duration={1.4} />
+          <span style={{ fontSize: "0.4em", color: "var(--muted)" }}>th</span>
+        </h2>
+        <MetricBadge value={admin.csatPercentile} />
+      </motion.div>
+      <motion.p className="lead" {...fadeUp} transition={{ delay: 0.9 }}>
+        percentile — {admin.csat.toFixed(1)} / 5 overall.
+      </motion.p>
       <motion.p
         className="sub scene-csat-comment"
         initial={{ opacity: 0 }}
@@ -42,8 +49,8 @@ export function SceneCsat({ admin }: SceneProps) {
           </>
         ) : (
           <>
-            Down <em>{delta.toFixed(1)}</em>. Some years, holding the line is the
-            win. AI Copilot could help lift it back.
+            Down <em>{delta.toFixed(1)}</em>. Some years, holding the line is the win.
+            AI Copilot could help lift it back.
           </>
         )}
       </motion.p>

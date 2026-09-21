@@ -5,30 +5,38 @@ import type { SceneProps } from "./types";
 
 const PEAK_INDEX = 47;
 
-function barHeight(i: number): number {
-  // deterministic pseudo-random-ish baseline with a swell toward the peak
+function barHeight(i: number, spikes: number[]): number {
   const base = 30 + (Math.sin(i * 1.7) * 0.5 + 0.5) * 35;
   const swell = Math.max(0, 1 - Math.abs(i - PEAK_INDEX) / 8) * 60;
-  return Math.min(100, base + swell);
+  const spikeBoost = spikes.some((s) => Math.abs(i - s) <= 1)
+    ? 18
+    : 0;
+  return Math.min(100, base + swell + spikeBoost);
 }
 
 export function ScenePeakWeek({ admin }: SceneProps) {
+  const spikes = admin.seasonalSpikes ?? [PEAK_INDEX];
+
   return (
     <SceneShell eyebrow="The surge">
       <motion.div className="histo scene-visual" {...fadeUp}>
-        {Array.from({ length: 52 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className={`bar${i === PEAK_INDEX ? " peak" : ""}`}
-            initial={{ height: 0 }}
-            animate={{ height: `${barHeight(i)}%` }}
-            transition={{
-              delay: 0.2 + i * 0.012,
-              duration: 0.4,
-              ease: [0.85, 0, 0.15, 1],
-            }}
-          />
-        ))}
+        {Array.from({ length: 52 }).map((_, i) => {
+          const isPeak = i === PEAK_INDEX;
+          const isSpike = spikes.includes(i) && !isPeak;
+          return (
+            <motion.div
+              key={i}
+              className={`bar${isPeak ? " peak" : ""}${isSpike ? " spike" : ""}`}
+              initial={{ height: 0 }}
+              animate={{ height: `${barHeight(i, spikes)}%` }}
+              transition={{
+                delay: 0.2 + i * 0.012,
+                duration: 0.4,
+                ease: [0.85, 0, 0.15, 1],
+              }}
+            />
+          );
+        })}
       </motion.div>
       <motion.h2 className="number" {...fadeUp} transition={{ delay: 0.9 }}>
         <CountUp value={admin.peakWeek.tickets} duration={1.2} />

@@ -2,15 +2,18 @@ import type { ComponentType } from "react";
 import type { SceneProps } from "./types";
 import { SceneOpen } from "./SceneOpen";
 import { SceneTickets } from "./SceneTickets";
-import { SceneWords } from "./SceneWords";
 import { SceneCsat } from "./SceneCsat";
 import { SceneSpeed } from "./SceneSpeed";
-import { ScenePeakWeek } from "./ScenePeakWeek";
+import { SceneSelfServe } from "./SceneSelfServe";
+import { SceneBenchmark } from "./SceneBenchmark";
+import { SceneAutomation } from "./SceneAutomation";
+import { SceneAi } from "./SceneAi";
+import { SceneMomentum } from "./SceneMomentum";
 import { SceneChannels } from "./SceneChannels";
-import { SceneLongThread } from "./SceneLongThread";
-import { SceneQuote } from "./SceneQuote";
-import { SceneTeam } from "./SceneTeam";
-import { SceneNext } from "./SceneNext";
+import { ScenePeakWeek } from "./ScenePeakWeek";
+import { SceneChampions } from "./SceneChampions";
+import { SceneVoice } from "./SceneVoice";
+import { ScenePlaybook } from "./ScenePlaybook";
 import { SceneRecap } from "./SceneRecap";
 
 export interface SceneDef {
@@ -19,17 +22,21 @@ export interface SceneDef {
   Component: ComponentType<SceneProps>;
 }
 
+/** Six-act spine — same personality, denser information architecture. */
 export const SCENES: SceneDef[] = [
   { id: "open", title: "Open", Component: SceneOpen },
-  { id: "tickets", title: "Tickets solved", Component: SceneTickets },
-  { id: "words", title: "Words written", Component: SceneWords },
+  { id: "tickets", title: "Tickets resolved", Component: SceneTickets },
   { id: "csat", title: "Customer Satisfaction", Component: SceneCsat },
   { id: "speed", title: "Speed", Component: SceneSpeed },
-  { id: "peak-week", title: "Peak week", Component: ScenePeakWeek },
+  { id: "self-serve", title: "Self-serve", Component: SceneSelfServe },
+  { id: "benchmark", title: "Where you stand", Component: SceneBenchmark },
+  { id: "automation", title: "Automation", Component: SceneAutomation },
+  { id: "ai", title: "AI adoption", Component: SceneAi },
+  { id: "momentum", title: "Quarterly momentum", Component: SceneMomentum },
   { id: "channels", title: "Channels", Component: SceneChannels },
-  { id: "long-thread", title: "Long thread", Component: SceneLongThread },
-  { id: "quote", title: "Praise", Component: SceneQuote },
-  { id: "team", title: "Team", Component: SceneTeam },
-  { id: "next", title: "What's next", Component: SceneNext },
+  { id: "peak-week", title: "Peak week", Component: ScenePeakWeek },
+  { id: "champions", title: "Team champions", Component: SceneChampions },
+  { id: "voice", title: "Customer voice", Component: SceneVoice },
+  { id: "playbook", title: "Playbook", Component: ScenePlaybook },
   { id: "recap", title: "Recap", Component: SceneRecap },
 ];
