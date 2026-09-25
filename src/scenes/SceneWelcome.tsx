@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { SceneShell } from "../components/SceneShell";
+import { SceneShell, fadeUp } from "../components/SceneShell";
+import { FireworksBurst } from "../components/FireworksBurst";
 import { dur, easeInOut1, easeLinear, easeOut } from "../lib/motion";
 import type { SceneProps } from "./types";
 
-const TITLE = "Your year,\nat the helm.";
+const TITLE = "Your year,\non the record.";
 
 function useTypewriter(text: string, startDelay = 400, speed = 40) {
   const [out, setOut] = useState("");
@@ -31,11 +32,11 @@ function useTypewriter(text: string, startDelay = 400, speed = 40) {
   return { out, done };
 }
 
-export function SceneOpen({ admin }: SceneProps) {
+export function SceneWelcome({ admin }: SceneProps) {
   const { out, done } = useTypewriter(TITLE);
 
   return (
-    <SceneShell>
+    <SceneShell className="scene-welcome" showCalcLink={false}>
       <motion.h1
         className="title"
         initial={{ opacity: 0 }}
@@ -59,13 +60,24 @@ export function SceneOpen({ admin }: SceneProps) {
         </motion.span>
       </motion.h1>
       <motion.p
-        className="sub"
+        className="sub welcome-org"
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: done ? 1 : 0, y: done ? 0 : 6 }}
         transition={{ duration: dur.expressive, ease: easeInOut1 }}
       >
         {admin.orgName} · {admin.year}
       </motion.p>
+      <motion.p
+        className="lead welcome-tagline"
+        {...fadeUp}
+        transition={{ delay: done ? 0.35 : 99 }}
+        style={{ opacity: done ? undefined : 0 }}
+      >
+        {admin.execTagline}
+      </motion.p>
+      <div className="welcome-fireworks scene-visual" aria-hidden>
+        {done && <FireworksBurst size="lg" delay={0.45} />}
+      </div>
     </SceneShell>
   );
 }

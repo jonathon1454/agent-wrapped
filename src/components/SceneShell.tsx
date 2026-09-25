@@ -10,6 +10,7 @@ export function SceneShell({
   children: ReactNode;
   eyebrow?: string;
   className?: string;
+  showCalcLink?: boolean;
 }) {
   return (
     <motion.section
