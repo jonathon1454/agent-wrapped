@@ -17,42 +17,54 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      pages_ready: ${{ steps.pages_check.outputs.ready }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Ensure GitHub Pages is enabled for Actions
+      # GITHUB_TOKEN cannot create a Pages site (needs repo admin once).
+      # If Pages is not enabled yet, skip deploy with a clear notice.
+      - name: Check GitHub Pages is enabled
+        id: pages_check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if ! gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
-            gh api --method POST "repos/${{ github.repository }}/pages" -f build_type=workflow
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
           else
-            gh api --method PUT "repos/${{ github.repository }}/pages" -f build_type=workflow || true
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages is not enabled. A repo admin must set Settings → Pages → Source to GitHub Actions, then re-run this workflow."
           fi
 
       - name: Setup Pages
+        if: steps.pages_check.outputs.ready == 'true'
         uses: actions/configure-pages@v5
 
       - name: Setup Node
+        if: steps.pages_check.outputs.ready == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
+        if: steps.pages_check.outputs.ready == 'true'
         run: npm ci
 
       - name: Build
+        if: steps.pages_check.outputs.ready == 'true'
         run: npm run build
 
       - name: Upload artifact
+        if: steps.pages_check.outputs.ready == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.pages_ready == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
